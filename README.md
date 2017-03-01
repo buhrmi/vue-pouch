@@ -62,10 +62,12 @@ The only requirement is that `pouchdb-live-find` is installed:
 Then, plug `pouchdb-vue` into Vue:
 
     Vue.use(require('pouchdb-vue'), {
-      pouch: PouchDB,          // optional if `PouchDB` is available on the global object
+      pouch: PouchDB,    // optional if `PouchDB` is available on the global object
       defaultDB: someDB  // optional, database name (string) or a PouchDB instance
     })
 
 ## Todo
 
-[ ] Add reactive properties that indicate a *loading* and *ready* state
+[] Forward errors (no connection, unauthorized, etc) to vue component
+[] Set up and tear down database syncing in pouch config options
+[] Reactive properties that indicate a *loading*, *ready* and *error* state
