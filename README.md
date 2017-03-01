@@ -32,11 +32,13 @@ Live and reactive PouchDB bindings for Vuejs with **[Mango Queries](https://blog
       }
       // You can also specify the database name dynamically, as well as limits, skip and sort order:
       peopleInOtherDatabase: function() {
-        database: this.$route.params.id,
-        selector: {type: "person"},
-        sort: {name: 1},
-        limit: this.resultsPerPage,
-        skip: this.resultsPerPage * (this.currentPage - 1)
+        return {
+          database: this.$route.params.id,
+          selector: {type: "person"},
+          sort: {name: 1},
+          limit: this.resultsPerPage,
+          skip: this.resultsPerPage * (this.currentPage - 1)
+        }
       }
     }
   })
