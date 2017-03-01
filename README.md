@@ -68,6 +68,6 @@ Then, plug `pouchdb-vue` into Vue:
 
 ## Todo
 
-[] Forward errors (no connection, unauthorized, etc) to vue component
-[] Set up and tear down database syncing in pouch config options
-[] Reactive properties that indicate a *loading*, *ready* and *error* state
+* [ ] Forward errors (no connection, unauthorized, etc) to vue component
+* [ ] Set up and tear down database syncing in pouch config options
+* [ ] Reactive properties that indicate a *loading*, *ready* and *error* state
