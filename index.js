@@ -1,5 +1,5 @@
 (function () {
-  let vue;
+  let vue = null;
   let databases = {};
   let pouchdbvue = {
     created: function() {
@@ -7,13 +7,13 @@
         console.warn('[pouchdb-vue] not installed!')
         return
       }
-      const { defineReactive } = vue.util;
+      let defineReactive = vue.util.defineReactive;
       let vm = this;
       let pouchOptions = this.$options.pouch;
       if (!pouchOptions) return;
       if (typeof pouchOptions == 'function') pouchOptions = pouchOptions();
       for (let key in pouchOptions) {
-        let liveFind;
+        let liveFind = null;
         if (!pouchOptions.hasOwnProperty(key)) return;
         let pouchFn = pouchOptions[key]
         this.$data[key] = null;
@@ -35,7 +35,7 @@
             selector = config
           }
           let databaseParam = config.database || api.defaults.database;
-          let db;
+          let db = null;
           if (typeof databaseParam == 'object') {
             db = databaseParam;
           }
