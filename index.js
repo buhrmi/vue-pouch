@@ -46,7 +46,11 @@
           if (liveFinds[key]) liveFinds[key].cancel()
           var aggregateCache = null
           liveFinds[key] = db.liveFind({
-            selector, sort, skip, limit, aggregate: true
+            selector: selector, 
+            sort: sort,
+            skip: skip,
+            limit: limit,
+            aggregate: true
           }).on('update', function(update, aggregate) {
             vm[key] = aggregateCache = aggregate;
           }).on('ready', function() {
