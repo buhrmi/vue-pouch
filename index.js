@@ -1,5 +1,7 @@
 (function () {
   var vue = null;
+  var pouch = null;
+  var defaultDB = null;
   var databases = {};
   var pouchdbvue = {
     created: function() {
@@ -34,15 +36,16 @@
           else {
             selector = config
           }
-          var databaseParam = config.database || api.defaults.database;
+          var databaseParam = config.database || defaultDB;
           var db = null;
           if (typeof databaseParam == 'object') {
             db = databaseParam;
           }
-          else {
-            if (!databases[databaseParam]) databases[databaseParam] = new PouchDB(databaseParam);
+          else if (typeof databaseParam == 'string') {
+            if (!databases[databaseParam]) databases[databaseParam] = new pouch(databaseParam);
             db = databases[databaseParam];
           }
+          if (!db) return;
           if (liveFinds[key]) liveFinds[key].cancel()
           var aggregateCache = null
           liveFinds[key] = db.liveFind({
@@ -56,6 +59,8 @@
           }).on('ready', function() {
             if (!aggregateCache) vm[key] = [];
           })
+        }, {
+          immediate: true
         })
       }   
       
@@ -65,10 +70,11 @@
   
   var api = {
     mixin: pouchdbvue,
-    defaults: {},
     install: function (Vue, options) {
-      vue = Vue
-      Vue.options = Vue.util.mergeOptions(Vue.options, pouchdbvue)
+      vue = Vue;
+      pouch = options.pouch || PouchDB;
+      defaultDB = options.defaultDB;
+      Vue.options = Vue.util.mergeOptions(Vue.options, pouchdbvue);
     }
   }
 

@@ -51,24 +51,18 @@ Install via npm:
 
     npm install --save pouchdb-vue
 
-The only requirement is that PouchDB is available on the global object with the `pouchdb-live-find` plugin installed:
+The only requirement is that `pouchdb-live-find` is installed:
 
-    PouchDB = require('pouchdb-browser');
+    let PouchDB = require('pouchdb-browser');
     PouchDB.plugin(require('pouchdb-find'));
     PouchDB.plugin(require('pouchdb-live-find'));
     
 Then, plug `pouchdb-vue` into Vue:
 
-    PouchDBVue = require(`pouchdb-vue`)
-    Vue.use(PouchDBVue)
-
-## Configuration
-
-Instead of passing a database name with every reactive property, you can also set a global "default" database:
-
-    PouchDBVue.defaults.database = new PouchDB('default-db', {options...})
-    // or
-    PouchDBVue.defaults.database = 'mydb'
+    Vue.use(require('pouchdb-vue'), {
+      pouch: PouchDB,          // optional if `PouchDB` is available on the global object
+      defaultDatabase: someDB  // optional, database name (string) or a PouchDB instance
+    })
 
 ## Todo
 
