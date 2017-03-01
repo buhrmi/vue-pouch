@@ -27,9 +27,9 @@ Live and reactive PouchDB bindings for Vuejs with **Mango Queries** 👌👌👌
             if (!this.age) return;
             return {age: this.age}
           }
-          // You can also specify the database name dynamically, as well as limits, skip and sort order:
+          // You can also specify the database (local or remote) dynamically, as well as limit, skip and sort order:
           peopleInOtherDatabase: function() {
-            database: this.$route.params.id,
+            database: this.selectedDatabase, // You can pass either a database name, or a pouchdb instance.
             selector: {type: "person"},
             sort: {name: 1},
             limit: this.resultsPerPage,
@@ -60,4 +60,6 @@ Then, plug `pouchdb-vue` into Vue:
 
 Instead of passing a database name with every reactive property, you can also set a global "default" database:
 
-    PouchDBVue.defaults.database = 'my-database'
+    PouchDBVue.defaults.database = new PouchDB('default-db', {options...})
+    // or
+    PouchDBVue.defaults.database = 'mydb'

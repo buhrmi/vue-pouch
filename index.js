@@ -1,7 +1,7 @@
 (function () {
-  var vue;
-  
-  var pouchdbvue = {
+  let vue;
+  let databases = {};
+  let pouchdbvue = {
     created: function() {
       if (!vue) {
         console.warn('[pouchdb-vue] not installed!')
@@ -11,7 +11,6 @@
       let vm = this;
       let pouchOptions = this.$options.pouch;
       if (!pouchOptions) return;
-      let databases = {};
       if (typeof pouchOptions == 'function') pouchOptions = pouchOptions();
       for (let key in pouchOptions) {
         let liveFind;
@@ -23,6 +22,7 @@
         this.$watch(pouchFn, function(config) {
           if (!config) {
             vm[key] = []
+            return;
           }
           let selector, sort, skip, limit;
           if (config.selector) {
@@ -34,14 +34,23 @@
           else {
             selector = config
           }
-          let databaseName = config.database || api.defaults.database;
-          if (!databases[databaseName]) databases[databaseName] = new PouchDB(databaseName);
-          let db = databases[databaseName];
+          let databaseParam = config.database || api.defaults.database;
+          let db;
+          if (typeof databaseParam == 'object') {
+            db = databaseParam;
+          }
+          else {
+            if (!databases[databaseParam]) databases[databaseParam] = new PouchDB(databaseParam);
+            db = databases[databaseParam];
+          }
           if (liveFind) liveFind.cancel()
+          let aggregateCache = null
           liveFind = db.liveFind({
             selector, sort, skip, limit, aggregate: true
           }).on('update', function(update, aggregate) {
-            vm[key] = aggregate;
+            vm[key] = aggregateCache = aggregate;
+          }).on('ready', function() {
+            if (!aggregateCache) vm[key] = [];
           })
         })
       }   
@@ -50,7 +59,7 @@
   }
 
   
-  var api = {
+  let api = {
     mixin: pouchdbvue,
     defaults: {},
     install: function (Vue, options) {
