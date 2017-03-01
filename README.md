@@ -61,7 +61,7 @@ Then, plug `pouchdb-vue` into Vue:
 
     Vue.use(require('pouchdb-vue'), {
       pouch: PouchDB,          // optional if `PouchDB` is available on the global object
-      defaultDatabase: someDB  // optional, database name (string) or a PouchDB instance
+      defaultDB: someDB  // optional, database name (string) or a PouchDB instance
     })
 
 ## Todo
