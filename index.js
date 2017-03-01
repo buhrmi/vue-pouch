@@ -1,21 +1,21 @@
 (function () {
-  let vue = null;
-  let databases = {};
-  let pouchdbvue = {
+  var vue = null;
+  var databases = {};
+  var pouchdbvue = {
     created: function() {
       if (!vue) {
         console.warn('[pouchdb-vue] not installed!')
         return
       }
-      let defineReactive = vue.util.defineReactive;
-      let vm = this;
-      let pouchOptions = this.$options.pouch;
+      var defineReactive = vue.util.defineReactive;
+      var vm = this;
+      var pouchOptions = this.$options.pouch;
       if (!pouchOptions) return;
       if (typeof pouchOptions == 'function') pouchOptions = pouchOptions();
-      for (let key in pouchOptions) {
-        let liveFind = null;
+      var liveFinds = {};
+      for (var key in pouchOptions) {
         if (!pouchOptions.hasOwnProperty(key)) return;
-        let pouchFn = pouchOptions[key]
+        var pouchFn = pouchOptions[key]
         this.$data[key] = null;
         defineReactive(this, key, null);
 
@@ -24,7 +24,7 @@
             vm[key] = []
             return;
           }
-          let selector, sort, skip, limit;
+          var selector, sort, skip, limit;
           if (config.selector) {
             selector = config.selector;
             sort: config.sort;
@@ -34,8 +34,8 @@
           else {
             selector = config
           }
-          let databaseParam = config.database || api.defaults.database;
-          let db = null;
+          var databaseParam = config.database || api.defaults.database;
+          var db = null;
           if (typeof databaseParam == 'object') {
             db = databaseParam;
           }
@@ -43,9 +43,9 @@
             if (!databases[databaseParam]) databases[databaseParam] = new PouchDB(databaseParam);
             db = databases[databaseParam];
           }
-          if (liveFind) liveFind.cancel()
-          let aggregateCache = null
-          liveFind = db.liveFind({
+          if (liveFinds[key]) liveFinds[key].cancel()
+          var aggregateCache = null
+          liveFinds[key] = db.liveFind({
             selector, sort, skip, limit, aggregate: true
           }).on('update', function(update, aggregate) {
             vm[key] = aggregateCache = aggregate;
@@ -59,7 +59,7 @@
   }
 
   
-  let api = {
+  var api = {
     mixin: pouchdbvue,
     defaults: {},
     install: function (Vue, options) {
