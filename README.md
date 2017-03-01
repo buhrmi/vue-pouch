@@ -2,6 +2,8 @@
 
 Live and reactive PouchDB bindings for Vuejs with **[Mango Queries](https://blog.couchdb.org/2016/08/03/feature-mango-query/)** 👌👌👌
 
+![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/pouchdb-vue/blob/master/vue-pouch.png)
+
 Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
 
 ## Example
