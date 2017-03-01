@@ -1,6 +1,6 @@
 # pouchdb-vue
 
-Live and reactive PouchDB bindings for Vuejs with **[Mango Queries](https://blog.couchdb.org/2016/08/03/feature-mango-query/)** 👌👌👌
+Live and reactive PouchDB bindings for Vuejs with **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)** 👌👌👌
 
 ![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/pouchdb-vue/blob/master/vue-pouch.png)
 
@@ -30,14 +30,14 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
       // The result of the query is assigned to the `people` property.
       people: function() {
         if (!this.age) return;
-        return {age: this.age}
+        return {age: this.age, type: "person"}
       },
       // You can also specify the database dynamically (local or remote), as well as limits, skip and sort order:
       peopleInOtherDatabase: function() {
         return {
           database: this.selectedDatabase, // you can pass a database string or a pouchdb instance
           selector: {type: "person"},
-          sort: {name: 1},
+          sort: [{name: "asc"}],
           limit: this.resultsPerPage,
           skip: this.resultsPerPage * (this.currentPage - 1)
         }
