@@ -1,8 +1,8 @@
-# pouchdb-vue
+# vue-pouch
 
 Live and reactive PouchDB bindings for Vuejs with **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)** 👌👌👌
 
-![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/pouchdb-vue/blob/master/vue-pouch.png)
+![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
 
 Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
 
@@ -51,7 +51,7 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 
 Install via npm:
 
-    npm install --save pouchdb-vue
+    npm install --save vue-pouch
 
 The only requirement is that `pouchdb-live-find` is installed:
 
@@ -59,9 +59,9 @@ The only requirement is that `pouchdb-live-find` is installed:
     PouchDB.plugin(require('pouchdb-find'));
     PouchDB.plugin(require('pouchdb-live-find'));
     
-Then, plug `pouchdb-vue` into Vue:
+Then, plug `vue-pouch` into Vue:
 
-    Vue.use(require('pouchdb-vue'), {
+    Vue.use(require('vue-pouch'), {
       pouch: PouchDB,    // optional if `PouchDB` is available on the global object
       defaultDB: someDB  // optional, database name (string) or a PouchDB instance
     })

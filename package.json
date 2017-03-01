@@ -1,5 +1,5 @@
 {
-  "name": "pouchdb-vue",
+  "name": "vue-pouch",
   "version": "0.0.6",
   "description": "Reactive PouchDB bindings for Vuejs",
   "main": "index.js",
@@ -13,9 +13,9 @@
   "author": "Stefan Buhrmester",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/qurateinc/pouchdb-vue/issues"
+    "url": "https://github.com/qurateinc/vue-pouch/issues"
   },
-  "homepage": "https://github.com/qurateinc/pouchdb-vue#readme",
+  "homepage": "https://github.com/qurateinc/vue-pouch#readme",
   "dependencies": {
     "pouchdb-find": "^0.10.5",
     "pouchdb-live-find": "^0.3.0"
