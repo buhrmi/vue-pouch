@@ -17,8 +17,8 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 </template>
 
 <script>
-  new Vue({
-    data: function() {
+  export default {
+    data () {
       return {
         resultsPerPage: 25,
         currentPage: 1
