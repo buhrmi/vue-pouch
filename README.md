@@ -60,7 +60,7 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
     <button v-else @click="$pouch.useAuth('myname', 'mypassword')">Authenticate</button>
     <button @click="$pouch.createUser('myname', 'mypassword')">Create User</button>
     Your remote session name: {{ $pouch.session.name }}
-    <div class="error" v-if="$pouch.error">There was an error: {{ $pouch.error }}</div>
+    <div class="error" v-if="$pouch.authError">There was an error: {{ $pouch.authError }}</div>
   </div>
 </template>
 ```
@@ -70,7 +70,7 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 ```vue
 <template>
   <div class="credentials">
-    <div class="error" v-if="$pouch.error.blog">{{ $pouch.error.blog }}</div>
+    <div class="error" v-if="$pouch.errors.blog">{{ $pouch.errors.blog }}</div>
   </div>
 </template>
 
