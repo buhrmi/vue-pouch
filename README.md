@@ -51,7 +51,7 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 
 ### User Authentication
 
-```
+```vue
 <template>
   <div class="credentials">
     <button v-if="$pouch.hasAuth" @click="$pouch.resetAuth()">Reset Authentication</button>
@@ -65,7 +65,7 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 
 ### Remote Syncing
 
-```
+```vue
 <template>
   <div class="credentials">
     <div class="error" v-if="$pouch.error.blog">{{ $pouch.error.blog }}</div>
