@@ -2,9 +2,9 @@
 
 PouchDB integration for Vuejs with live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**, **Remote Syncing**, and **Authentication**. It's all you need to build the next awesome PWA.
 
-> "The Couch is the Source of Truth." - Somebody
-
 ![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
+
+> "The Couch is the Source of Truth." - Somebody
 
 Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
 
