@@ -1,6 +1,6 @@
 {
   "name": "vue-pouch",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Reactive PouchDB bindings for Vuejs",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/qurateinc/vue-pouch#readme",
   "dependencies": {
-    "pouchdb-find": "^0.10.5",
     "pouchdb-live-find": "^0.3.0"
   }
 }
