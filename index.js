@@ -66,24 +66,54 @@
           vm.$pouch.session = {}
           if (defaultDB) defaultDB.logout()
         },
-        sync: function(localDB, remoteDB) {
-          var pausedCount = 0;
+        sync: function(localDB, remoteDB, _options) {
           if (!databases[localDB])  databases[localDB] = new pouch(localDB);
           if (!databases[remoteDB]) databases[remoteDB] = new pouch(remoteDB);
           if (!defaultDB) defaultDB = databases[remoteDB];
-          pouch.sync(databases[localDB], databases[remoteDB], {
-            live: true, retry: true
-          }).on('paused', function (err) {
+          var options = Object.assign({}, _options, {live: true, retry: true})
+          pouch.sync(databases[localDB], databases[remoteDB], options)
+          .on('paused', function (err) {
             // console.log('paused callback')
-          }).on('active', function () {
+          })
+          .on('active', function () {
             // console.log('active callback')
-          }).on('denied', function (err) {
+          })
+          .on('denied', function (err) {
             vm.$pouch.errors[localDB] = error
             vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
             // console.log('denied callback')
-          }).on('complete', function (info) {
+          })
+          .on('complete', function (info) {
             // console.log('complete callback')
-          }).on('error', function (err) {
+          })
+          .on('error', function (err) {
+            vm.$pouch.errors[localDB] = error
+            vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
+            // console.log('error callback')
+          })
+          fetchSession(databases[remoteDB]);
+        },
+        push: function(localDB, remoteDB, _options) {
+          if (!databases[localDB])  databases[localDB] = new pouch(localDB);
+          if (!databases[remoteDB]) databases[remoteDB] = new pouch(remoteDB);
+          if (!defaultDB) defaultDB = databases[remoteDB];
+          var options = Object.assign({}, _options, {live: true, retry: true})
+          databases[localDB].replicate.to(databases[remoteDB], options)
+          .on('paused', function (err) {
+            // console.log('paused callback')
+          })
+          .on('active', function () {
+            // console.log('active callback')
+          })
+          .on('denied', function (err) {
+            vm.$pouch.errors[localDB] = error
+            vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
+            // console.log('denied callback')
+          })
+          .on('complete', function (info) {
+            // console.log('complete callback')
+          })
+          .on('error', function (err) {
             vm.$pouch.errors[localDB] = error
             vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
             // console.log('error callback')

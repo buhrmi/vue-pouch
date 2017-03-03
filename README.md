@@ -117,7 +117,8 @@ database that has been configured using the `$pouch.sync` method.
 
 #### Methods
 
-* `$pouch.sync(localDatabase, remoteDatabase)`: Sets up a remote database. Also, if the browser has an active session cookie, it will fetch session data (username, etc) from the remote server.
+* `$pouch.sync(localDatabase, remoteDatabase)`: Basically the same as PouchDB.sync(local, remote, {live: true, retry: true}). Also, if the browser has an active session cookie, it will fetch session data (username, etc) from the remote server.
+* `$pouch.push(localDatabase, remoteDatabase)`: Like localdb.replicate.to(remotedb, {live: true, retry: true}). Also, if the browser has an active session cookie, it will fetch session data (username, etc) from the remote server.
 * `$pouch.createUser(name, password)`: Create a user in the remote database and also start a new session.
 * `$pouch.useAuth(name, password)`: Set credentials to use to start a session with the remote server.
 * `$pouch.resetAuth()`: Forgets the credentials, session data and session cookie.
