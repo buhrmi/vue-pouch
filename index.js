@@ -146,7 +146,7 @@
       for (var key in pouchOptions) {
         if (!pouchOptions.hasOwnProperty(key)) continue;
         var pouchFn = pouchOptions[key];
-        if (typeof pouchFn !== 'function) {
+        if (typeof pouchFn !== 'function') {
           pouchFn = function() {
             return pouchOptions[key];
           }    
