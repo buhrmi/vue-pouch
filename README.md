@@ -1,8 +1,10 @@
 # vue-pouch 👌👌👌
 
-PouchDB integration for Vuejs with live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**, **Remote Syncing**, and **Authentication**. It's all you need to build the next awesome PWA.
+PouchDB integration for Vuejs with live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**.
 
 ![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
+
+> "The Couch is the Source of Truth." - Somebody
 
 Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
 
@@ -51,24 +53,24 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 
 ### User Authentication
 
-```
+```vue
 <template>
   <div class="credentials">
     <button v-if="$pouch.hasAuth" @click="$pouch.resetAuth()">Reset Authentication</button>
     <button v-else @click="$pouch.useAuth('myname', 'mypassword')">Authenticate</button>
     <button @click="$pouch.createUser('myname', 'mypassword')">Create User</button>
     Your remote session name: {{ $pouch.session.name }}
-    <div class="error" v-if="$pouch.error">There was an error: {{ $pouch.error }}</div>
+    <div class="error" v-if="$pouch.authError">There was an error: {{ $pouch.authError }}</div>
   </div>
 </template>
 ```
 
 ### Remote Syncing
 
-```
+```vue
 <template>
   <div class="credentials">
-    <div class="error" v-if="$pouch.error.blog">{{ $pouch.error.blog }}</div>
+    <div class="error" v-if="$pouch.errors.blog">{{ $pouch.errors.blog }}</div>
   </div>
 </template>
 
@@ -103,6 +105,7 @@ Then, plug VuePouch into Vue:
 
     Vue.use(require('vue-pouch'), {
       pouch: PouchDB,    // optional if `PouchDB` is available on the global object
+      defaultDB:         // the database to use if none is specified in the pouch setting of the vue component
     })
 
 ## API
