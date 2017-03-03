@@ -120,12 +120,25 @@
           })
           fetchSession(databases[remoteDB]);
         },
+        put: function(db, object, options) {
+          return databases[db].put(object, options);
+        },
+        post: function(db, object, options) {
+          return databases[db].post(object, options);
+        },
+        remove: function(db, object, options) {
+          return databases[db].remove(object, options);
+        },
+        get: function(db, object, options) {
+          return databases[db].get(db, object, options);
+        },
         session: {},
         errors: {},
         authError: null,
         gotAuth: false
       }
       defineReactive(vm, '$pouch', $pouch);
+      $pouch.db = databases; // Add non-reactive property
       
       var pouchOptions = this.$options.pouch;
       if (!pouchOptions) return;
@@ -182,6 +195,27 @@
         })
       }   
     }
+  }
+  
+  function installPlugins() {
+    // This plugin enables selector-based replication
+    pouch.plugin(function(pouch) {
+      var oldReplicate = pouch.replicate
+      pouch.replicate = function(source, target, repOptions) {
+        var sourceAjax = source._ajax
+        source._ajax = function(ajaxOps, callback) {
+          if (ajaxOps.url.includes('_selector')) {
+            ajaxOps.url = ajaxOps.url.replace('filter=_selector%2F_selector', 'filter=_selector')
+            ajaxOps.method = 'POST'
+            ajaxOps.body = {
+              selector: repOptions.selector
+            }
+          }
+          return sourceAjax(ajaxOps, callback)
+        }
+        return oldReplicate(source, target, repOptions)
+      }
+    })
   }
   
   var api = {

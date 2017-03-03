@@ -1,6 +1,12 @@
 # vue-pouch 👌👌👌
 
-PouchDB integration for Vuejs with live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**.
+Integrates pouch, pouchdb-live-find, and pouchdb-authentication into your Vue Components.
+
+It gives you
+
+* User Authentication
+* Live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**.
+* Remote Database Syncing with Mango Queries 
 
 ![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
 
@@ -9,6 +15,29 @@ PouchDB integration for Vuejs with live and reactive **[Mango Queries](http://do
 Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
 
 ## Examples
+
+### Simple Todo App
+
+```vue
+<template>
+  <input v-model="message" placeholder="Enter Message">
+  <button @click="$pouch.post('todos', {message: message});message=''">Save Todo</button>
+  <div v-for="todo in todos">
+    {{ message }} <button @click="$pouch.remove('todos', todo)">Remove</button>
+  </div>
+</template>
+
+<script>
+  export default {
+    pouch: {
+      todos: function() {
+        return {
+          database: 'todos',
+          selector: {}
+        }
+      }
+    }
+  }
 
 ### Live and reactive Mango Queries
 
@@ -120,8 +149,20 @@ database that has been configured using the `$pouch.sync` method.
 
 #### Methods
 
-* `$pouch.sync(localDatabase, remoteDatabase)`: Basically the same as PouchDB.sync(local, remote, {live: true, retry: true}). Also, if the browser has an active session cookie, it will fetch session data (username, etc) from the remote server.
+* `$pouch.sync(localDatabase, remoteDatabase)`: Basically the same as PouchDB.sync(local, remote, {live: true, retry: true}). Also, if the browser has an active session cookie, it will fetch session data (username, etc) from the remote server. **BONUS:** If your remote database runs CouchDB 2.0 or higher, you can also specify a Mango Selector that is used to filter documents coming from the remote server.
+
+For example
+
+    $pouch.sync('complaints', 'https:/42.233.1.44/complaints', {
+      filter:'\_selector',
+      selector: {
+        type: 'complaint',
+        assignee: this.session.name
+      }
+    })
+
 * `$pouch.push(localDatabase, remoteDatabase)`: Like localdb.replicate.to(remotedb, {live: true, retry: true}). Also, if the browser has an active session cookie, it will fetch session data (username, etc) from the remote server.
+* `$pouch.put/post/remove/get(database, ...)`: Same as db.put(...)
 * `$pouch.createUser(name, password)`: Create a user in the remote database and also start a new session.
 * `$pouch.useAuth(name, password)`: Set credentials to use to start a session with the remote server.
 * `$pouch.resetAuth()`: Forgets the credentials, session data and session cookie.
@@ -132,6 +173,10 @@ database that has been configured using the `$pouch.sync` method.
 * `$pouch.authError`: Contains the authentication error, if one occured (eg. when calling useAuth, createUser, etc).
 * `$pouch.session`: Contains information about the current session with the remote database (eg. user name, roles, etc.)
 * `$pouch.errors`: A json object containing errors that occured on databases. The object key is the name of the database, the value is the error.
+
+#### Non-Reactive Properties
+
+* `$pouch.databases`: the pouchdb instances.
 
 ## Todo
 

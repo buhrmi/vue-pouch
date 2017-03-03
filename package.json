@@ -1,6 +1,6 @@
 {
   "name": "vue-pouch",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Reactive PouchDB bindings for Vuejs",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qurateinc/pouchdb-vue.git"
+    "url": "git+https://github.com/qurateinc/vue-pouch.git"
   },
   "author": "Stefan Buhrmester",
   "license": "ISC",
