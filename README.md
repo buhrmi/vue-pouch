@@ -1,6 +1,6 @@
 # vue-pouch 👌👌👌
 
-Integrates pouch, pouchdb-live-find, and pouchdb-authentication into your Vue Components.
+Integrates **pouchdb**, **pouchdb-live-find**, and **pouchdb-authentication** into your Vue Components.
 
 It gives you
 
@@ -8,22 +8,23 @@ It gives you
 * Live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**.
 * Remote Database Syncing with Mango Queries 
 
-![If you have Pouch and Vue, you have Pouch and Vue](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
+![Vue + Pouch = Love](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
 
-> "The Couch is the Source of Truth." - Somebody
+> I have a Vue. I have a Pouch. Uhhh. VuePouch.
 
 Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
 
-## Examples
+## Example Usages
 
-### Simple Todo App
+### Todo App with real-time 3-way data syncing (Vue <-> IndexedDB <-> CouchDB)
 
 ```vue
 <template>
-  <input v-model="message" placeholder="Enter Message">
+  <input v-model="message" placeholder="New Todo">
   <button @click="$pouch.post('todos', {message: message});message=''">Save Todo</button>
   <div v-for="todo in todos">
-    {{ message }} <button @click="$pouch.remove('todos', todo)">Remove</button>
+    <input v-model="todo.message" @change="$post.put('todos', todo)">
+    <button @click="$pouch.remove('todos', todo)">Remove</button>
   </div>
 </template>
 
@@ -36,8 +37,26 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
           selector: {}
         }
       }
+    },
+    created: function() {
+      $pouch.sync('todos', 'http://localhost:5984/todos'); // CouchDB
     }
   }
+```
+
+### User Authentication
+
+```vue
+<template>
+  <div class="credentials">
+    <button v-if="$pouch.hasAuth" @click="$pouch.resetAuth()">Reset Authentication</button>
+    <button v-else @click="$pouch.useAuth('myname', 'mypassword')">Authenticate</button>
+    <button @click="$pouch.createUser('myname', 'mypassword')">Create User</button>
+    Your remote session name: {{ $pouch.session.name }}
+    <div class="error" v-if="$pouch.authError">There was an error: {{ $pouch.authError }}</div>
+  </div>
+</template>
+```
 
 ### Live and reactive Mango Queries
 
@@ -77,39 +96,6 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
       }
     }
   })
-</script>
-```
-
-### User Authentication
-
-```vue
-<template>
-  <div class="credentials">
-    <button v-if="$pouch.hasAuth" @click="$pouch.resetAuth()">Reset Authentication</button>
-    <button v-else @click="$pouch.useAuth('myname', 'mypassword')">Authenticate</button>
-    <button @click="$pouch.createUser('myname', 'mypassword')">Create User</button>
-    Your remote session name: {{ $pouch.session.name }}
-    <div class="error" v-if="$pouch.authError">There was an error: {{ $pouch.authError }}</div>
-  </div>
-</template>
-```
-
-### Remote Syncing
-
-```vue
-<template>
-  <div class="credentials">
-    <div class="error" v-if="$pouch.errors.blog">{{ $pouch.errors.blog }}</div>
-  </div>
-</template>
-
-<script>
-export default {
-  created: function() {
-    // This will set up a live sync
-    this.$pouch.sync('blog', 'remotehost/blog')
-  }
-}
 </script>
 ```
 
