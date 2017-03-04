@@ -31,17 +31,15 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 <script>
   export default {
     pouch: {
-      todos: function() {
-        return {
-          database: 'todos',
-          selector: {}
-        }
-      }
+      // The simplest usage. queries all documents from the "todos" pouch database and assigns them to the "todos" vue property
+      todos: {/*empty selector*/}
     },
     created: function() {
-      $pouch.sync('todos', 'http://localhost:5984/todos'); // CouchDB
+      // Send all documents to the remote database, and stream changes in real-time
+      $pouch.sync('todos', 'http://localhost:5984/todos');
     }
   }
+</script>
 ```
 
 ### User Authentication
