@@ -168,10 +168,10 @@ For example
 
 These things are on the list to be doped out at a later time.
 
+* [ ] Leader election (only "leader" browser tab may sync with remote db)
 * [ ] Lazy (on-demand) attachments
 * [ ] Resumable uploads
-* [ ] Conflict handling after offline changes
-* [ ] Way to handle sync errors (no connection, auth errors, ..) in reactive way
-* [ ] Change username/password, store user meta info
+* [ ] Conflict resolution
+* [ ] User management: Change password/username, store meta info
 * [ ] Two-factor auth
 * [ ] Third-party auth
