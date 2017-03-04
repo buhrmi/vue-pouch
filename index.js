@@ -169,7 +169,7 @@
           else {
             selector = config
           }
-          var databaseParam = config.database || defaultDB;
+          var databaseParam = config.database || key;
           var db = null;
           if (typeof databaseParam == 'object') {
             db = databaseParam;
