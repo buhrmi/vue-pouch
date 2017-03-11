@@ -16,7 +16,7 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 
 ## Example Usages
 
-### Todo App with real-time 4-way data syncing: (UI <-> Vue <-> IndexedDB <-> CouchDB)
+### Todo App with real-time 4-way data syncing: DOM <-> Vue <-> IndexedDB <-> CouchDB
 
 ```vue
 <template>
