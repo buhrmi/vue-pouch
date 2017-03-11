@@ -30,33 +30,20 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 
 <script>
   export default {
+    // VuePouch adds a `pouch` config option to all components.
     pouch: {
-      // The simplest usage. queries all documents from the "todos" pouch database and assigns them to the "todos" vue property
+      // The simplest usage. queries all documents from the "todos" pouch database and assigns them to the "todos" vue property.
       todos: {/*empty selector*/}
     },
     created: function() {
       // Send all documents to the remote database, and stream changes in real-time
-      $pouch.sync('todos', 'http://localhost:5984/todos');
+      this.$pouch.sync('todos', 'http://localhost:5984/todos');
     }
   }
 </script>
 ```
 
-### User Authentication
-
-```vue
-<template>
-  <div class="credentials">
-    <button v-if="$pouch.hasAuth" @click="$pouch.resetAuth()">Reset Authentication</button>
-    <button v-else @click="$pouch.useAuth('myname', 'mypassword')">Authenticate</button>
-    <button @click="$pouch.createUser('myname', 'mypassword')">Create User</button>
-    Your remote session name: {{ $pouch.session.name }}
-    <div class="error" v-if="$pouch.authError">There was an error: {{ $pouch.authError }}</div>
-  </div>
-</template>
-```
-
-### Live and reactive Mango Queries
+### Reactive & Live Selectors (Mango Queries)
 
 ```vue
 <template>
@@ -96,6 +83,22 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
   })
 </script>
 ```
+
+### User Authentication
+
+```vue
+<template>
+  <div class="credentials">
+    <button v-if="$pouch.hasAuth" @click="$pouch.resetAuth()">Reset Authentication</button>
+    <button v-else @click="$pouch.useAuth('myname', 'mypassword')">Authenticate</button>
+    <button @click="$pouch.createUser('myname', 'mypassword')">Create User</button>
+    Your remote session name: {{ $pouch.session.name }}
+    <div class="error" v-if="$pouch.authError">There was an error: {{ $pouch.authError }}</div>
+  </div>
+</template>
+```
+
+
 
 
 ## Installation
