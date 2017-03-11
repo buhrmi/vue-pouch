@@ -63,7 +63,7 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
     },
     // Use the pouch property to configure the component to (reactively) read data from pouchdb.
     pouch: {
-      // The function returns a Mango-like selector that is run against a pre-configured default database.
+      // The function returns a Mango-like selector that is run against the `people` database.
       // The result of the query is assigned to the `people` property.
       people: function() {
         if (!this.age) return;
