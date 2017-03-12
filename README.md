@@ -109,7 +109,7 @@ Install via npm:
 
 The only requirement is that `pouchdb-live-find` is installed:
 
-    let PouchDB = require('pouchdb-browser');
+    const PouchDB = require('pouchdb-browser');
     PouchDB.plugin(require('pouchdb-find'));
     PouchDB.plugin(require('pouchdb-live-find'));
     
@@ -141,7 +141,7 @@ database that has been configured using the `$pouch.sync` method.
 For example
 
     $pouch.sync('complaints', 'https:/42.233.1.44/complaints', {
-      filter:'\_selector',
+      filter:'_selector',
       selector: {
         type: 'complaint',
         assignee: this.session.name
