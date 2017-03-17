@@ -43,6 +43,24 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 </script>
 ```
 
+### Feedback when loading initial replication
+
+```vue
+<template>
+  <div v-if="$pouch.loading.blog">Still loading... Relax.</div>
+  <div v-else>Blog has been loaded.</div>
+</template>
+
+<script>
+  export default {
+    created: function() {
+      this.$pouch.sync('blog', 'http://localhost:5984/blog');
+    }
+  }
+</script>
+```
+
+
 ### Reactive & Live Selectors (Mango Queries)
 
 ```vue
@@ -156,6 +174,7 @@ For example
 
 #### Reactive Properties
 
+* `$pouch.loading`: Contains an object with synced database names as the keys. The value of each key is `true` while the initial loading happens. This API is a little bit unreliable at the moment.
 * `$pouch.hasAuth`: `true`, if VuePouch has credentials
 * `$pouch.authError`: Contains the authentication error, if one occured (eg. when calling useAuth, createUser, etc).
 * `$pouch.session`: Contains information about the current session with the remote database (eg. user name, roles, etc.)

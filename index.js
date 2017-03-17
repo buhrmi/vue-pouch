@@ -20,18 +20,18 @@
       function fetchSession(database) {
         if (['http','https'].indexOf(database.adapter) == -1) return;
         database.getSession().then(function(res) {
-          database.getUser(res.userCtx.name).then(function(res) {
+          return database.getUser(res.userCtx.name).then(function(res) {
             vm.$pouch.session = res;
-          }).catch(function(error) {
-            vm.$pouch.authError = error
-          });
-        })
+          })
+        }).catch(function(error) {
+          vm.$pouch.authError = error
+        });
       }
       function login(database) {
         if (['http','https'].indexOf(database.adapter) == -1) return;
         database.login(defaultUsername, defaultPassword).then(function(res) {
           vm.$pouch.session = res;
-          database.getUser(defaultUsername).then(function(res) {
+          return database.getUser(defaultUsername).then(function(res) {
             vm.$pouch.session = res;
           })
         }).catch(function(error) {
@@ -71,26 +71,39 @@
           if (!databases[remoteDB]) databases[remoteDB] = new pouch(remoteDB);
           if (!defaultDB) defaultDB = databases[remoteDB];
           var options = Object.assign({}, _options, {live: true, retry: true})
+          var numPaused = 0;
+          vm.$pouch.loading[localDB] = true
+          // defineReactive(vm, '$pouch.ready', vm.$pouch.ready)
           pouch.sync(databases[localDB], databases[remoteDB], options)
           .on('paused', function (err) {
-            // console.log('paused callback')
+            if (err) {
+              vm.$pouch.errors[localDB] = err
+              vm.$pouch.errors = Object.assign({}, vm.$pouch.errors)  
+              return;
+            }
+            numPaused += 1;
+            if (numPaused >= 2) {
+              vm.$pouch.loading[localDB] = false
+              vm.$pouch.loading = Object.assign({}, vm.$pouch.loading)
+            }
           })
           .on('active', function () {
+            console.log('ACTIVE')
             // console.log('active callback')
           })
           .on('denied', function (err) {
-            vm.$pouch.errors[localDB] = error
-            vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
+            vm.$pouch.errors[localDB] = err
+            vm.$pouch.errors = Object.assign({}, vm.$pouch.errors)
             // console.log('denied callback')
           })
           .on('complete', function (info) {
             // console.log('complete callback')
           })
           .on('error', function (err) {
-            vm.$pouch.errors[localDB] = error
-            vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
-            // console.log('error callback')
+            vm.$pouch.errors[localDB] = err
+            vm.$pouch.errors = Object.assign({}, vm.$pouch.errors)
           })
+          
           fetchSession(databases[remoteDB]);
         },
         push: function(localDB, remoteDB, _options) {
@@ -106,16 +119,16 @@
             // console.log('active callback')
           })
           .on('denied', function (err) {
-            vm.$pouch.errors[localDB] = error
-            vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
+            vm.$pouch.errors[localDB] = err
+            vm.$pouch.errors = Object.assign({}, vm.$pouch.errors)
             // console.log('denied callback')
           })
           .on('complete', function (info) {
             // console.log('complete callback')
           })
           .on('error', function (err) {
-            vm.$pouch.errors[localDB] = error
-            vm.$pouch.errors = Object.assign({}, vm.$pouch.error)
+            vm.$pouch.errors[localDB] = err
+            vm.$pouch.errors = Object.assign({}, vm.$pouch.errors)
             // console.log('error callback')
           })
           fetchSession(databases[remoteDB]);
@@ -134,6 +147,7 @@
         },
         session: {},
         errors: {},
+        loading: {},
         authError: null,
         gotAuth: false
       }
