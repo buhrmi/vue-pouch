@@ -74,7 +74,7 @@
           var numPaused = 0;
           vm.$pouch.loading[localDB] = true
           // defineReactive(vm, '$pouch.ready', vm.$pouch.ready)
-          pouch.sync(databases[localDB], databases[remoteDB], options)
+          return pouch.sync(databases[localDB], databases[remoteDB], options)
           .on('paused', function (err) {
             if (err) {
               vm.$pouch.errors[localDB] = err
@@ -106,12 +106,12 @@
           
           fetchSession(databases[remoteDB]);
         },
-        push: function(localDB, remoteDB, _options) {
+        push: function(localDB, remoteDB, options) {
           if (!databases[localDB])  databases[localDB] = new pouch(localDB);
           if (!databases[remoteDB]) databases[remoteDB] = new pouch(remoteDB);
           if (!defaultDB) defaultDB = databases[remoteDB];
-          var options = Object.assign({}, _options, {live: true, retry: true})
-          databases[localDB].replicate.to(databases[remoteDB], options)
+          fetchSession(databases[remoteDB]);
+          return databases[localDB].replicate.to(databases[remoteDB], options)
           .on('paused', function (err) {
             // console.log('paused callback')
           })
@@ -131,7 +131,6 @@
             vm.$pouch.errors = Object.assign({}, vm.$pouch.errors)
             // console.log('error callback')
           })
-          fetchSession(databases[remoteDB]);
         },
         put: function(db, object, options) {
           return databases[db].put(object, options);
@@ -241,8 +240,8 @@
     mixin: vuePouch,
     install: function (Vue, options) {
       vue = Vue;
-      pouch = options.pouch || PouchDB;
-      defaultDB = options.defaultDB;
+      pouch = (options && options.pouch) || PouchDB;
+      defaultDB = (options && options.defaultDB);
       Vue.options = Vue.util.mergeOptions(Vue.options, vuePouch);
     }
   }
