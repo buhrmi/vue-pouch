@@ -156,18 +156,16 @@
       var pouchOptions = this.$options.pouch;
       if (!pouchOptions) return;
       if (typeof pouchOptions == 'function') pouchOptions = pouchOptions();
-      for (var key in pouchOptions) {
-        if (!pouchOptions.hasOwnProperty(key)) continue;
+      Object.keys(pouchOptions).map(function(key) {
         var pouchFn = pouchOptions[key];
         if (typeof pouchFn !== 'function') {
           pouchFn = function() {
             return pouchOptions[key];
           }    
         }
-        this.$data[key] = null;
-        defineReactive(this, key, null);
-
-        this.$watch(pouchFn, function(config) {
+        vm.$data[key] = null;
+        defineReactive(vm, key, null);
+        vm.$watch(pouchFn, function(config) {
           if (!config) {
             vm[key] = []
             return;
@@ -196,7 +194,7 @@
           }
           if (!db) return;
           if (liveFinds[key]) liveFinds[key].cancel()
-          var aggregateCache = null
+          var aggregateCache = []
           liveFinds[key] = db.liveFind({
             selector: selector, 
             sort: sort,
@@ -204,6 +202,7 @@
             limit: limit,
             aggregate: true
           }).on('update', function(update, aggregate) {
+            console.log('hhhh',key, aggregate)
             vm[key] = aggregateCache = aggregate;
           }).on('ready', function() {
             if (!aggregateCache) vm[key] = [];
@@ -211,7 +210,7 @@
         }, {
           immediate: true
         })
-      }   
+      })
     }
   }
   
