@@ -173,9 +173,9 @@
           var selector, sort, skip, limit;
           if (config.selector) {
             selector = config.selector;
-            sort: config.sort;
-            skip: config.skip;
-            limit: config.limit;
+            sort = config.sort;
+            skip = config.skip;
+            limit = config.limit;
           }
           else {
             selector = config
