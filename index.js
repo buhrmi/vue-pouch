@@ -202,7 +202,6 @@
             limit: limit,
             aggregate: true
           }).on('update', function(update, aggregate) {
-            console.log('hhhh',key, aggregate)
             vm[key] = aggregateCache = aggregate;
           }).on('ready', function() {
             if (!aggregateCache) vm[key] = [];
