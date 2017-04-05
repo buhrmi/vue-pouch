@@ -182,7 +182,7 @@ For example
 
 #### Non-Reactive Properties
 
-* `$pouch.databases`: the pouchdb instances.
+* `vm.$databases`: the pouchdb instances. shared across all components.
 
 ## Todo
 

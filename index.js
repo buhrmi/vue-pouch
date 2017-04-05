@@ -151,7 +151,7 @@
         gotAuth: false
       }
       defineReactive(vm, '$pouch', $pouch);
-      $pouch.db = databases; // Add non-reactive property
+      vm.$databases = databases; // Add non-reactive property
       
       var pouchOptions = this.$options.pouch;
       if (!pouchOptions) return;
