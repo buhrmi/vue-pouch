@@ -7,6 +7,9 @@
   var databases = {};
   
   var vuePouch = {
+    destroyed: function() {
+      Object.values(this._liveFinds).map(function(lf) { lf.cancel(); });
+    },
     created: function() {
       if (!vue) {
         console.warn('[vue-pouch] not installed!')
@@ -14,8 +17,7 @@
       }
       var defineReactive = vue.util.defineReactive;
       var vm = this;
-      
-      var liveFinds = {};
+      vm._liveFinds = {};
       
       function fetchSession(database) {
         if (['http','https'].indexOf(database.adapter) == -1) return;
@@ -193,9 +195,9 @@
             db = databases[databaseParam];
           }
           if (!db) return;
-          if (liveFinds[key]) liveFinds[key].cancel()
+          if (vm._liveFinds[key]) vm._liveFinds[key].cancel()
           var aggregateCache = []
-          liveFinds[key] = db.liveFind({
+          vm._liveFinds[key] = db.liveFind({
             selector: selector, 
             sort: sort,
             skip: skip,
@@ -204,7 +206,7 @@
           }).on('update', function(update, aggregate) {
             vm[key] = aggregateCache = aggregate;
           }).on('ready', function() {
-            if (!aggregateCache) vm[key] = [];
+            vm[key] = aggregateCache;
           })
         }, {
           immediate: true
