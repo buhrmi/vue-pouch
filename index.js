@@ -165,19 +165,20 @@
             return pouchOptions[key];
           }    
         }
-        vm.$data[key] = null;
+        if (typeof vm.$data[key] == 'undefined') vm.$data[key] = null;
         defineReactive(vm, key, null);
         vm.$watch(pouchFn, function(config) {
           if (!config) {
-            vm[key] = []
+            if (!vm[key]) vm[key] = []
             return;
           }
-          var selector, sort, skip, limit;
+          var selector, sort, skip, limit, first;
           if (config.selector) {
             selector = config.selector;
             sort = config.sort;
             skip = config.skip;
             limit = config.limit;
+            first = config.first;
           }
           else {
             selector = config
@@ -204,6 +205,7 @@
             limit: limit,
             aggregate: true
           }).on('update', function(update, aggregate) {
+            if (first && aggregate) aggregate = aggregate[0]
             vm[key] = aggregateCache = aggregate;
           }).on('ready', function() {
             vm[key] = aggregateCache;

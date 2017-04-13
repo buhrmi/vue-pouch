@@ -102,6 +102,26 @@ Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the qu
 </script>
 ```
 
+### Single documents
+
+If you only want to sync a single document that matches a selector, use `first: true`:
+
+```vue
+module.exports = {
+  // ...
+  pouch: {  
+    projectDetails: function() {
+      return {
+        database: 'mydatabase',
+        selector: {_id: this.selectedProjectId},
+        first: true
+      }
+    }
+  }
+  // ...
+}
+```
+
 ### User Authentication
 
 ```vue
