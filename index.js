@@ -90,7 +90,6 @@
             }
           })
           .on('active', function () {
-            console.log('ACTIVE')
             // console.log('active callback')
           })
           .on('denied', function (err) {
@@ -217,7 +216,7 @@
     }
   }
   
-  function installPlugins() {
+  function installSelectorReplicationPlugin() {
     // This plugin enables selector-based replication
     pouch.plugin(function(pouch) {
       var oldReplicate = pouch.replicate
@@ -243,6 +242,7 @@
     install: function (Vue, options) {
       vue = Vue;
       pouch = (options && options.pouch) || PouchDB;
+      installSelectorReplicationPlugin()
       defaultDB = (options && options.defaultDB);
       Vue.options = Vue.util.mergeOptions(Vue.options, vuePouch);
     }
