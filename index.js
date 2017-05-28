@@ -143,7 +143,7 @@
           return databases[db].remove(object, options);
         },
         get: function(db, object, options) {
-          return databases[db].get(db, object, options);
+          return databases[db].get(object, options);
         },
         session: {},
         errors: {},
