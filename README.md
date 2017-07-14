@@ -1,8 +1,8 @@
-# vue-pouch 👌👌👌
+# vue-pouch
 
 Integrates **pouchdb**, **pouchdb-live-find**, and **pouchdb-authentication** into your Vue Components.
 
-It gives you
+It gives you:
 
 * User Authentication
 * Live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**.
@@ -147,7 +147,7 @@ Install via npm:
 
 The only requirement is that `pouchdb-live-find` is installed:
 
-    const PouchDB = require('pouchdb-browser');
+    import PouchDB from 'pouchdb-browser'
     PouchDB.plugin(require('pouchdb-find'));
     PouchDB.plugin(require('pouchdb-live-find'));
     
