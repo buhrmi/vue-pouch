@@ -1,7 +1,7 @@
 <template>
   <div id="todo_list">
     <p>
-    This is the compiled vue-pouch example app located at <a href="http://github.com/buhrmi/vue-pouch/docs/app">http://github.com/buhrmi/vue-pouch/docs/app</a>
+    This is the compiled vue-pouch example app located at <a href="https://github.com/buhrmi/vue-pouch/tree/master/docs/app">https://github.com/buhrmi/vue-pouch/tree/master/docs/app</a>
     </p>
     <input v-model="message" placeholder="New Todo">
     <button @click="$pouch.post('todos', {message: message});message=''">Save Todo</button>
