@@ -1,22 +1,12 @@
 # vue-pouch
 
-Integrates **pouchdb**, **pouchdb-live-find**, and **pouchdb-authentication** into your Vue Components.
+Reactive Vue bindings for PouchDB using [pouchdb-live-find](https://github.com/colinskow/pouchdb-live-find)
 
-It gives you:
-
-* User Authentication
-* Live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**.
-* Remote Database Syncing with Mango Queries 
-
-![Vue + Pouch = Love](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
-
-> I have a Vue. I have a Pouch. Uhhh. VuePouch.
-
-Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
-
-## Example Usages
+## Examples
 
 ### Todo App with real-time 4-way data syncing: DOM <-> Vue <-> IndexedDB <-> CouchDB
+
+Try this example here: https://buhrmi.github.io/vue-pouch/
 
 ```vue
 <template>
@@ -166,13 +156,9 @@ Then, plug VuePouch into Vue:
 
 ## API
 
-When using VuePouch, don't use `new PouchDB(...)`, `db.login` or `db.sync` directly, since VuePouch needs to hook into their callbacks. Instead, use the functions provided by the `$pouch` property on your vue instance.
-
 ### $pouch
 
-In theory, VuePouch can handle multiple remote servers at the same time. However,
-all user authentication and session management is done on the **first** http/https
-database that has been configured using the `$pouch.sync` method.
+`$pouch` is made available on all vue instances and has some helper functions. Note that this API is not stable and will probably change.
 
 #### Methods
 
@@ -206,14 +192,3 @@ For example
 
 * `vm.$databases`: the pouchdb instances. shared across all components.
 
-## Todo
-
-These things are on the list to be doped out at a later time.
-
-* [ ] Leader election (only "leader" browser tab may sync with remote db)
-* [ ] Lazy (on-demand) attachments
-* [ ] Resumable uploads
-* [ ] Conflict resolution
-* [ ] User management: Change password/username, store meta info
-* [ ] Two-factor auth
-* [ ] Third-party auth
