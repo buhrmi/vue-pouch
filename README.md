@@ -1,22 +1,12 @@
 # vue-pouch
 
-Integrates **pouchdb**, **pouchdb-live-find**, and **pouchdb-authentication** into your Vue Components.
+Reactive Vue bindings for PouchDB using [pouchdb-live-find](https://github.com/colinskow/pouchdb-live-find)
 
-It gives you:
-
-* User Authentication
-* Live and reactive **[Mango Queries](http://docs.couchdb.org/en/2.0.0/api/database/find.html)**.
-* Remote Database Syncing with Mango Queries 
-
-![Vue + Pouch = Love](https://github.com/QurateInc/vue-pouch/blob/master/vue-pouch.png)
-
-> I have a Vue. I have a Pouch. Uhhh. VuePouch.
-
-Refer to https://github.com/nolanlawson/pouchdb-find for documentation on the query structure and a guide on how to create indexes.
-
-## Example Usages
+## Examples
 
 ### Todo App with real-time 4-way data syncing: DOM <-> Vue <-> IndexedDB <-> CouchDB
+
+Try this example here: https://buhrmi.github.io/vue-pouch/
 
 ```vue
 <template>
