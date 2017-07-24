@@ -156,13 +156,9 @@ Then, plug VuePouch into Vue:
 
 ## API
 
-When using VuePouch, don't use `new PouchDB(...)`, `db.login` or `db.sync` directly, since VuePouch needs to hook into their callbacks. Instead, use the functions provided by the `$pouch` property on your vue instance.
-
 ### $pouch
 
-In theory, VuePouch can handle multiple remote servers at the same time. However,
-all user authentication and session management is done on the **first** http/https
-database that has been configured using the `$pouch.sync` method.
+`$pouch` is made available on all vue instances and has some helper functions. Note that this API is not stable and will probably change.
 
 #### Methods
 
@@ -196,14 +192,3 @@ For example
 
 * `vm.$databases`: the pouchdb instances. shared across all components.
 
-## Todo
-
-These things are on the list to be doped out at a later time.
-
-* [ ] Leader election (only "leader" browser tab may sync with remote db)
-* [ ] Lazy (on-demand) attachments
-* [ ] Resumable uploads
-* [ ] Conflict resolution
-* [ ] User management: Change password/username, store meta info
-* [ ] Two-factor auth
-* [ ] Third-party auth
