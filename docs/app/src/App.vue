@@ -6,7 +6,7 @@
     <input v-model="message" placeholder="New Todo">
     <button @click="$pouch.post('todos', {message: message});message=''">Save Todo</button>
     <div v-for="todo in todos">
-      <input v-model="todo.message" @change="$pouch.put('todos', todo)">
+      <input v-model="todo.message" @change="$pouch.put('todos', todo, {})">
       <button @click="$pouch.remove('todos', todo)">Remove</button>
     </div>
   </div>
