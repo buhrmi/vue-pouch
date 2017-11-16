@@ -22,6 +22,9 @@
     created: function() {
       // Send all documents to the remote database, and stream changes in real-time
       this.$pouch.sync('todos', 'http://localhost:5984/todos');
+    },
+    data:function(){
+      return {message : ""};    
     }
   }
 </script>
