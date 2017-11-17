@@ -134,16 +134,16 @@
           })
         },
         put: function(db, object, options) {
-          return databases[db].put(object, options);
+          return databases[db].put(object, options || {});
         },
         post: function(db, object, options) {
-          return databases[db].post(object, options);
+          return databases[db].post(object, options || {});
         },
         remove: function(db, object, options) {
-          return databases[db].remove(object, options);
+          return databases[db].remove(object, options || {});
         },
         get: function(db, object, options) {
-          return databases[db].get(object, options);
+          return databases[db].get(object, options || {});
         },
         session: {},
         errors: {},
