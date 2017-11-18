@@ -1,6 +1,6 @@
 {
   "name": "vue-pouch",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Reactive PouchDB bindings for Vuejs",
   "main": "index.js",
   "scripts": {
