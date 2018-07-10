@@ -1,3 +1,5 @@
+> Please use this package for rapid prototyping purposes only. I do not recommend this for any sort of production environment.
+
 # vue-pouch
 
 Reactive Vue bindings for PouchDB using [pouchdb-live-find](https://github.com/colinskow/pouchdb-live-find).
