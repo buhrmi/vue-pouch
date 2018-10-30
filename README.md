@@ -1,3 +1,5 @@
+# DONT STAR THIS PROJECT ITS CRAP!!!
+
 > Please use this package for rapid prototyping purposes only. I do not recommend this for any sort of production environment.
 
 # vue-pouch
