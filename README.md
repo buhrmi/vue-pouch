@@ -1,10 +1,7 @@
-
-
 # vue-pouch
 
 Reactive Vue bindings for PouchDB using [pouchdb-live-find](https://github.com/colinskow/pouchdb-live-find).
 
-Hint: vue-pouch is also available as a [nuxt module](https://github.com/buhrmi/nuxt-pouch). Please consider using [nuxt](https://nuxtjs.org) for your next application.
 
 ## Examples
 
