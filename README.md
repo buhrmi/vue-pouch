@@ -7,7 +7,7 @@ Reactive Vue bindings for PouchDB using [pouchdb-live-find](https://github.com/c
 
 ### Todo App with real-time 4-way data syncing: DOM <-> Vue <-> IndexedDB <-> CouchDB
 
-Try this example here: https://buhrmi.github.io/vue-pouch/
+Try this example here: https://djshitcoin.github.io/vue-pouch/
 
 ```vue
 <template>
