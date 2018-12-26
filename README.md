@@ -1,6 +1,4 @@
-# STOP STARING THIS REPO! ITS CRAP!!!
 
-> Please use this package for rapid prototyping purposes only. I do not recommend this for any sort of production environment.
 
 # vue-pouch
 
@@ -36,23 +34,6 @@ Try this example here: https://buhrmi.github.io/vue-pouch/
     created: function() {
       // Send all documents to the remote database, and stream changes in real-time
       this.$pouch.sync('todos', 'http://localhost:5984/todos');
-    }
-  }
-</script>
-```
-
-### Feedback when loading initial replication
-
-```vue
-<template>
-  <div v-if="$pouch.loading.blog">Still loading... Relax.</div>
-  <div v-else>Blog has been loaded.</div>
-</template>
-
-<script>
-  export default {
-    created: function() {
-      this.$pouch.sync('blog', 'http://localhost:5984/blog');
     }
   }
 </script>
@@ -119,22 +100,6 @@ module.exports = {
   // ...
 }
 ```
-
-### User Authentication
-
-```vue
-<template>
-  <div class="credentials">
-    <button v-if="$pouch.hasAuth" @click="$pouch.resetAuth()">Reset Authentication</button>
-    <button v-else @click="$pouch.useAuth('myname', 'mypassword')">Authenticate</button>
-    <button @click="$pouch.createUser('myname', 'mypassword')">Create User</button>
-    Your remote session name: {{ $pouch.session.name }}
-    <div class="error" v-if="$pouch.authError">There was an error: {{ $pouch.authError }}</div>
-  </div>
-</template>
-```
-
-
 
 
 ## Installation
