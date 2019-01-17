@@ -1,3 +1,5 @@
+> Please, only use this library for prototyping purposes. Authentication is kind-of broken. I don't recommend it for production use. There are many forks of this project that try to solve some of the issues. It might be worthwhile to look at this one https://github.com/MDSLKTR/pouch-vue 
+
 # vue-pouch
 
 Reactive Vue bindings for PouchDB using [pouchdb-live-find](https://github.com/colinskow/pouchdb-live-find).
@@ -7,7 +9,7 @@ Reactive Vue bindings for PouchDB using [pouchdb-live-find](https://github.com/c
 
 ### Todo App with real-time 4-way data syncing: DOM <-> Vue <-> IndexedDB <-> CouchDB
 
-Try this example here: https://djshitcoin.github.io/vue-pouch/
+Try this example here: https://buhrmi.github.io/vue-pouch/
 
 ```vue
 <template>
