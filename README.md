@@ -1,4 +1,4 @@
-> Please, only use this plugin for prototyping purposes. Authentication is kind-of broken/badly implemented. I don't recommend this plugin for production use. There are a couple of re-implementations of this project that try to address the shortcomings. It might be worthwhile to look at this one https://github.com/MDSLKTR/pouch-vue 
+> Use this plugin for prototyping purposes only. Authentication is kind-of broken/badly implemented. There are a couple of re-implementations of this project that try to address the shortcomings. It might be worthwhile to look at this one https://github.com/MDSLKTR/pouch-vue 
 
 # vue-pouch
 
