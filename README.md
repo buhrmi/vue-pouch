@@ -1,4 +1,4 @@
-> This plugin is not maintained anymore. Please go here for a better implementation with a similar API https://github.com/MDSLKTR/pouch-vue 
+> This plugin is not maintained. Please go here: https://github.com/MDSLKTR/pouch-vue 
 
 # vue-pouch
 
