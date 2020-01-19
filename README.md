@@ -1,4 +1,4 @@
-> This plugin is not maintained. Please go here: https://github.com/MDSLKTR/pouch-vue 
+> This plugin is not maintained. Also, authentication is broken/shittily implemented. Here is a better alternative: https://github.com/MDSLKTR/pouch-vue 
 
 # vue-pouch
 
