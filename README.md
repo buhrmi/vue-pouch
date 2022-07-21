@@ -1,4 +1,4 @@
-Pssst... I'm not working with Vue anymore. This plugin is old and bad. Here is a better alternative: https://github.com/MDSLKTR/pouch-vue. If for whatever reason you're looking it this, please re-evaluate your life choices and look at [Svelte](https://svelte.dev).
+Pssst... I'm not working with Vue anymore. This plugin is old and bad. Here is a better alternative: https://github.com/MDSLKTR/pouch-vue. However, if for whatever reason you find yourself looking at this, please re-evaluate your life choices and look at [Svelte](https://svelte.dev).
 
 # vue-pouch
 
